@@ -3,86 +3,86 @@ interface SelectableItem {
   description: string;
 }
 
-const EMPTY_LABEL = "none";
+const EMPTY_LABEL = "無";
 
 const LABELS: Readonly<Readonly<SelectableItem>[]> = [
   {
-    label: "none",
+    label: "無",
     description:
-      "No conventional comment label will be applied. Select this if you prefer not to categorize your comment or if none of the categories are appropriate.",
+      "不套用任何標籤。如果你覺得這則留言不需要分類，或是沒有適合的類別，就選這個。",
   },
   {
-    label: "praise",
+    label: "讚",
     description:
-      "Praises highlight something positive. Try to leave at least one of these comments per review. _Do not_ leave false praise (which can actually be damaging). _Do_ look for something to sincerely praise.",
+      "用來肯定做得好的地方。每次 code review 盡量至少留一則讚美，讓對方知道哪裡寫得不錯。但請真心誠意，不要為了讚而讚，虛假的讚美反而會造成反效果。",
   },
   {
-    label: "nitpick",
+    label: "龜毛",
     description:
-      "Nitpicks are small, trivial, but necessary changes. Distinguishing nitpick comments significantly helps direct the reader's attention to comments requiring more involvement.",
+      "針對一些小細節的個人偏好，例如命名風格、空格位置等。這類留言本質上不應該阻擋合併，但提出來可以讓程式碼更一致。標註「龜毛」可以讓對方知道這不是什麼大問題，可以自行決定要不要改。",
   },
   {
-    label: "suggestion",
+    label: "建議",
     description:
-      "Suggestions propose improvements to the current subject. It's important to be explicit and clear on _what_ is being suggested and _why_ it is an improvement. Consider using patches and the _blocking_ or _non-blocking_ decorations to further communicate your intent.",
+      "提出改善的方向或替代做法。留言時請清楚說明「建議改成什麼」以及「為什麼這樣比較好」。可以搭配「需重視」或「供參考」來表達這個建議的重要程度。如果有具體的程式碼範例會更好。",
   },
   {
-    label: "issue",
+    label: "問題",
     description:
-      "Issues highlight specific problems with the subject under review. These problems can be user-facing or behind the scenes. It is strongly recommended to pair this comment with a `suggestion`. If you are not sure if a problem exists or not, consider leaving a `question`.",
+      "指出程式碼中明確的錯誤或缺陷，可能是 bug、邏輯漏洞、效能問題，或是會影響使用者體驗的狀況。強烈建議搭配「建議」一起使用，告訴對方可以怎麼修。如果你不確定是不是真的有問題，請改用「提問」。",
   },
   {
-    label: "todo",
+    label: "待辦",
     description:
-      "TODO's are small, trivial, but necessary changes. Distinguishing todo comments from issues: or suggestions: helps direct the reader's attention to comments requiring more involvement.",
+      "小而必要的修改，通常很快就能處理完。跟「問題」或「建議」區分開來，可以讓對方快速掃過這些小事，把注意力留給更需要思考的留言。",
   },
   {
-    label: "question",
+    label: "提問",
     description:
-      "Questions are appropriate if you have a potential concern but are not quite sure if it's relevant or not. Asking the author for clarification or investigation can lead to a quick resolution.",
+      "當你看到一段程式碼覺得怪怪的，但又不確定是不是真的有問題時使用。透過提問讓作者解釋他的思路，有時候問一下就能快速釐清疑慮，也可能真的發現潛在問題。",
   },
   {
-    label: "thought",
+    label: "想法",
     description:
-      "Thoughts represent an idea that popped up from reviewing. These comments are non-blocking by nature, but they are extremely valuable and can lead to more focused initiatives and mentoring opportunities.",
+      "review 過程中突然冒出的靈感或延伸思考，例如「這邊未來也許可以...」。這類留言不需要對方採取行動，但可能激發更深入的討論，或成為之後優化的方向。",
   },
   {
-    label: "chore",
+    label: "雜事",
     description:
-      'Chores are simple tasks that must be done before the subject can be "officially" accepted. Usually, these comments reference some common process. Try to leave a link to the process description so that the reader knows how to resolve the chore.',
+      "合併前需要完成的流程性工作，例如跑測試、更新文件、補上 changelog 等。通常是團隊既有的規範，建議附上相關文件或 wiki 連結，讓對方知道怎麼處理。",
   },
   {
-    label: "note",
+    label: "備註",
     description:
-      "Notes are always non-blocking and simply highlight something the reader should take note of.",
+      "單純的提醒或補充資訊，不需要對方做任何修改。例如提醒這段程式碼跟另一個地方有關聯，或是分享一些背景知識。",
   },
   {
-    label: "typo",
+    label: "錯字",
     description:
-      "Typo comments are like **todo**, where the main issue is a mispelling.",
+      "發現拼字錯誤或打錯字。跟「待辦」類似，都是小事但應該要修，獨立標出來可以讓對方快速處理。",
   },
   {
-    label: "polish",
+    label: "潤飾",
     description:
-      "Polish comments are like a **suggestion**, where there is nothing necessarily wrong with the relevant content, there's just some ways to immediately improve the quality.",
+      "程式碼本身沒有錯，但有一些地方可以馬上變得更好，例如更清楚的命名、更簡潔的寫法、更好的註解等。跟「建議」類似，但強調的是錦上添花而非修正問題。",
   },
 ];
 
 const DECORATIONS: Readonly<Readonly<SelectableItem>[]> = [
   {
-    label: "non-blocking",
+    label: "供參考",
     description:
-      "A comment with this decoration **should not** prevent the subject under review from being accepted. This is helpful for organizations that consider comments blocking by default.",
+      "這則留言**不應該**阻擋合併。對方可以參考看看，但不處理也沒關係。適合用在一些個人偏好、小優化、或是未來可以考慮的方向。",
   },
   {
-    label: "blocking",
+    label: "需重視",
     description:
-      "A comment with this decoration **should** prevent the subject under review from being accepted, until it is resolved. This is helpful for organizations that consider comments non-blocking by default.",
+      "這則留言**必須**在合併前解決。可能是重大 bug、安全漏洞、或是違反團隊規範的寫法。標上這個讓對方知道這是認真的，不是隨便說說。",
   },
   {
-    label: "if-minor",
+    label: "如果好改",
     description:
-      "This decoration gives some freedom to the author that they should resolve the comment only if the changes ends up being minor or trivial.",
+      "如果改起來很簡單就改一下，如果很麻煩就算了。給作者一點彈性自己判斷，不用為了小事大費周章。",
   },
 ];
 
